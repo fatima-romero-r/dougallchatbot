@@ -21,7 +21,7 @@ document.getElementById('chat-input').addEventListener('keypress', async (e) => 
 });
       
       const data = await response.json();
-      updateLastBotMessage(data.reply || 'Sorry, no reply.');
+      updateLastBotMessage(data.reply || 'Sorry, I have no reply.');
     } catch (err) {
       updateLastBotMessage('Error: Failed to fetch.');
     }

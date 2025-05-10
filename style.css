@@ -1,32 +1,66 @@
-// chatbot.js
-document.addEventListener("DOMContentLoaded", function () {
-  const chatbotBubble = document.getElementById("chatbot-bubble");
-  const chatWindow = document.getElementById("chat-window");
-  const closeChatButton = document.getElementById("close-chat");
-  const userMessageInput = document.getElementById("user-message");
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  // Toggle chat window visibility when the bubble is clicked
-  chatbotBubble.addEventListener("click", function () {
-    chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
-  });
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
 
-  // Close the chat window
-  closeChatButton.addEventListener("click", function () {
-    chatWindow.style.display = "none";
-  });
+.hidden {
+  display: none;
+}
 
-  // Handle sending a message (optional)
-  userMessageInput.addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-      const message = userMessageInput.value.trim();
-      if (message) {
-        const messageElement = document.createElement("div");
-        messageElement.classList.add("message");
-        messageElement.textContent = message;
-        chatWindow.querySelector(".messages").appendChild(messageElement);
-        userMessageInput.value = ""; // Clear input
-        chatWindow.querySelector(".messages").scrollTop = chatWindow.querySelector(".messages").scrollHeight;
-      }
-    }
-  });
-});
+/* Chatbot Bubble */
+.chatbot-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Window */
+.chat-window {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.chat-input-container {
+  padding: 10px;
+  background-color: #f4f4f4;
+}
+
+#chat-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#chat-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}

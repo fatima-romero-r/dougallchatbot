@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dougall Chatbot</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<!-- Chatbot Bubble -->
+<div class="chatbot-bubble" id="chatbotBubble" onclick="openChat()">
+    💬
+</div>
 
-  <!-- Chatbot container -->
-  <div id="chatbot-container">
-    <div id="chatbot-window">
-      <div id="chatbox">
-        <div id="chatlog"></div>
-      </div>
-      <input type="text" id="user-input" placeholder="Ask me anything..." />
-      <button id="send-button">Send</button>
+<!-- Chatbot Popup -->
+<div id="chatbotPopup" class="chatbot-popup">
+    <div class="chatbot-header">
+        <h3>Chat with Us</h3>
+        <button onclick="closeChat()">X</button>
     </div>
-  </div>
+    <iframe src="https://fatima-romero-r.github.io/dougallchatbot/" width="350" height="500"></iframe>
+</div>
 
-  <script src="chatbot.js"></script>
-</body>
-</html>

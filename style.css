@@ -1,49 +1,32 @@
+// chatbot.js
+document.addEventListener("DOMContentLoaded", function () {
+  const chatbotBubble = document.getElementById("chatbot-bubble");
+  const chatWindow = document.getElementById("chat-window");
+  const closeChatButton = document.getElementById("close-chat");
+  const userMessageInput = document.getElementById("user-message");
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-#chatbot-bubble {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #007bff;
-  color: white;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 999;
-}
-#chat-window {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  width: 300px;
-  max-height: 400px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  z-index: 999;
-}
-#chat-window.hidden {
-  display: none;
-}
-#chat-messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-}
-#chat-input {
-  border: none;
-  border-top: 1px solid #ccc;
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
+  // Toggle chat window visibility when the bubble is clicked
+  chatbotBubble.addEventListener("click", function () {
+    chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
+  });
+
+  // Close the chat window
+  closeChatButton.addEventListener("click", function () {
+    chatWindow.style.display = "none";
+  });
+
+  // Handle sending a message (optional)
+  userMessageInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      const message = userMessageInput.value.trim();
+      if (message) {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        messageElement.textContent = message;
+        chatWindow.querySelector(".messages").appendChild(messageElement);
+        userMessageInput.value = ""; // Clear input
+        chatWindow.querySelector(".messages").scrollTop = chatWindow.querySelector(".messages").scrollHeight;
+      }
+    }
+  });
+});

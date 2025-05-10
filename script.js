@@ -14,11 +14,12 @@ document.getElementById('chat-input').addEventListener('keypress', async (e) => 
     appendMessage('Bot', 'Thinking...');
 
     try {
-      const response = await fetch('https://dougallgpt.com/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input })
-      });
+      const response = await fetch('https://dougallgpt.com/new-chat-endpoint', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ message: input })
+});
+      
       const data = await response.json();
       updateLastBotMessage(data.reply || 'Sorry, no reply.');
     } catch (err) {

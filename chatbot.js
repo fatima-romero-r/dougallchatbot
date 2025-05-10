@@ -1,19 +1,18 @@
-// Handle sending a message to the chatbot
-document.getElementById('send-button').addEventListener('click', function() {
-  const userInput = document.getElementById('user-input').value;
-  if (userInput.trim() === "") return;
+// Function to open the chatbot popup
+function openChat() {
+    document.getElementById("chatbotPopup").style.display = "block"; // Show the popup
+    document.getElementById("chatbotBubble").style.display = "none"; // Hide the bubble
+}
 
-  // Display user's message in chatlog
-  const chatlog = document.getElementById('chatlog');
-  chatlog.innerHTML += `<div><b>You:</b> ${userInput}</div>`;
+// Function to close the chatbot popup
+function closeChat() {
+    document.getElementById("chatbotPopup").style.display = "none"; // Hide the popup
+    document.getElementById("chatbotBubble").style.display = "block"; // Show the bubble again
+}
 
-  // Clear the input field
-  document.getElementById('user-input').value = '';
-
-  // Simulate chatbot response (replace this with real API call)
-  setTimeout(() => {
-    const chatbotResponse = "Dougall Bot: I'm here to help!";
-    chatlog.innerHTML += `<div><b>Dougall Bot:</b> ${chatbotResponse}</div>`;
-    chatlog.scrollTop = chatlog.scrollHeight; // Scroll to bottom
-  }, 1000); // Delay to simulate typing
-});
+// Make the chatbot bubble follow you around
+window.onscroll = function() {
+    var bubble = document.getElementById("chatbotBubble");
+    var scrollPosition = window.scrollY;
+    bubble.style.bottom = 20 + scrollPosition + "px"; // Follow the user as they scroll
+};

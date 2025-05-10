@@ -9,9 +9,9 @@ function initChatbot() {
   chatWindow.classList.add("chat-window");
   chatContainer.appendChild(chatWindow);
 
-  // Chatbot's initial message
+  // Chatbot's initial message in a bubble
   const botMessage = document.createElement("div");
-  botMessage.classList.add("chat-message", "bot-message");
+  botMessage.classList.add("chat-message", "bot-message", "bubble");
   botMessage.textContent = "Hello! How can I help you today?";
   chatWindow.appendChild(botMessage);
 
@@ -40,5 +40,11 @@ function sendMessage(userInput, chatWindow) {
   const userMessage = userInput.value.trim();
   
   if (userMessage) {
+    // Create user message bubble
     const userMessageDiv = document.createElement("div");
-    userMessageDiv.classList.add("chat-message", "user-message");
+    userMessageDiv.classList.add("chat-message", "user-message", "bubble");
+    userMessageDiv.textContent = userMessage;
+    chatWindow.appendChild(userMessageDiv);
+
+    // Simulate bot response in a bubble
+    setTimeout

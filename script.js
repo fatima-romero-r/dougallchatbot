@@ -1,43 +1,44 @@
+// chatbot.js
 
-document.getElementById('chatbot-bubble').addEventListener('click', () => {
-  const chatWindow = document.getElementById('chat-window');
-  chatWindow.classList.toggle('hidden');
-});
+// Function to initialize and manage the chatbot's behavior
+function initChatbot() {
+  const chatContainer = document.getElementById("chat-container");
+  
+  // Initialize chat window
+  const chatWindow = document.createElement("div");
+  chatWindow.classList.add("chat-window");
+  chatContainer.appendChild(chatWindow);
 
-document.getElementById('chat-input').addEventListener('keypress', async (e) => {
-  if (e.key === 'Enter') {
-    const input = e.target.value;
-    if (!input.trim()) return;
-    appendMessage('You', input);
-    e.target.value = '';
+  // Chatbot's initial message
+  const botMessage = document.createElement("div");
+  botMessage.classList.add("chat-message", "bot-message");
+  botMessage.textContent = "Hello! How can I help you today?";
+  chatWindow.appendChild(botMessage);
 
-    appendMessage('Bot', 'Thinking...');
+  // User input handling
+  const userInput = document.createElement("input");
+  userInput.type = "text";
+  userInput.placeholder = "Type your message...";
+  chatWindow.appendChild(userInput);
 
-    try {
-      const response = await fetch('https://dougallgpt.com/new-chat-endpoint', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ message: input })
-});
-      
-      const data = await response.json();
-      updateLastBotMessage(data.reply || 'Sorry, I have no reply.');
-    } catch (err) {
-      updateLastBotMessage('Error: Failed to fetch.');
+  // Send button
+  const sendButton = document.createElement("button");
+  sendButton.textContent = "Send";
+  sendButton.addEventListener("click", () => sendMessage(userInput, chatWindow));
+  chatWindow.appendChild(sendButton);
+
+  // Handle user message
+  userInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      sendMessage(userInput, chatWindow);
     }
-  }
-});
-
-function appendMessage(sender, text) {
-  const msg = document.createElement('div');
-  msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
-  document.getElementById('chat-messages').appendChild(msg);
-  msg.scrollIntoView();
+  });
 }
 
-function updateLastBotMessage(text) {
-  const messages = document.querySelectorAll('#chat-messages div');
-  if (messages.length) {
-    messages[messages.length - 1].innerHTML = `<strong>Bot:</strong> ${text}`;
-  }
-}
+// Function to send a message from the user
+function sendMessage(userInput, chatWindow) {
+  const userMessage = userInput.value.trim();
+  
+  if (userMessage) {
+    const userMessageDiv = document.createElement("div");
+    userMessageDiv.classList.add("chat-message", "user-message");
